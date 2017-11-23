@@ -308,7 +308,7 @@ void doRender(SDL_Renderer *renderer, GameState *game)
                      NULL, &rect, 0, NULL, (game->man.facingLeft == 0));
     
     
-    SDL_Rect sentarRect = { game->sentar.x, game->sentar.y, 250, 250 };
+    SDL_Rect sentarRect = { game->sentar.x, game->sentar.y, 150, 150 };
     SDL_RenderCopyEx(renderer, game->sentarFrame[game->sentar.animFrame], NULL, &sentarRect, 0, NULL, (game->sentar.facingLeft==0));
     
     SDL_RenderPresent(renderer);
