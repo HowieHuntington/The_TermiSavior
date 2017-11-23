@@ -1,0 +1,347 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E41B72A91FC487B500EBF50E /* sentar.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = E41B72A81FC487B500EBF50E /* sentar.png */; };
+		E41B72B31FC4EB9400EBF50E /* jesusA.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = E41B72B21FC4EB9400EBF50E /* jesusA.png */; };
+		E41B72B51FC4EBD300EBF50E /* jesusB.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = E41B72B41FC4EBD300EBF50E /* jesusB.png */; };
+		E48AD3D51FBF7C1600BF9850 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E48AD3D41FBF7C1600BF9850 /* main.c */; };
+		E48AD3E21FBF804A00BF9850 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E48AD3DD1FBF7D7E00BF9850 /* SDL2.framework */; };
+		E48AD3E81FBF857E00BF9850 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E48AD3E71FBF857E00BF9850 /* SDL2_image.framework */; };
+		E48AD3EA1FBF86AA00BF9850 /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E48AD3E91FBF86AA00BF9850 /* SDL2_ttf.framework */; };
+		E48AD3EB1FC29E5500BF9850 /* SDL2_ttf.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E48AD3E91FBF86AA00BF9850 /* SDL2_ttf.framework */; };
+		E48AD3EC1FC29E5500BF9850 /* SDL2_image.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E48AD3E71FBF857E00BF9850 /* SDL2_image.framework */; };
+		E48AD3ED1FC29E5500BF9850 /* SDL2.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E48AD3DD1FBF7D7E00BF9850 /* SDL2.framework */; };
+		E498036D1FC4FF08006E87C8 /* background2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = E498036C1FC4FF08006E87C8 /* background2.png */; };
+		E498036F1FC605CF006E87C8 /* backgroundwithpent.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = E498036E1FC605CF006E87C8 /* backgroundwithpent.png */; };
+		E49803711FC67972006E87C8 /* checkerback.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = E49803701FC67972006E87C8 /* checkerback.png */; };
+		E49803731FC68311006E87C8 /* 3dbackground.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = E49803721FC68311006E87C8 /* 3dbackground.png */; };
+		E49803791FC72BD3006E87C8 /* sentar2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = E49803781FC72BD3006E87C8 /* sentar2.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E48AD3CF1FBF7C1600BF9850 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				E49803791FC72BD3006E87C8 /* sentar2.png in CopyFiles */,
+				E49803731FC68311006E87C8 /* 3dbackground.png in CopyFiles */,
+				E49803711FC67972006E87C8 /* checkerback.png in CopyFiles */,
+				E498036F1FC605CF006E87C8 /* backgroundwithpent.png in CopyFiles */,
+				E498036D1FC4FF08006E87C8 /* background2.png in CopyFiles */,
+				E41B72B51FC4EBD300EBF50E /* jesusB.png in CopyFiles */,
+				E41B72B31FC4EB9400EBF50E /* jesusA.png in CopyFiles */,
+				E41B72A91FC487B500EBF50E /* sentar.png in CopyFiles */,
+				E48AD3EB1FC29E5500BF9850 /* SDL2_ttf.framework in CopyFiles */,
+				E48AD3EC1FC29E5500BF9850 /* SDL2_image.framework in CopyFiles */,
+				E48AD3ED1FC29E5500BF9850 /* SDL2.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		E41B72A81FC487B500EBF50E /* sentar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sentar.png; sourceTree = "<group>"; };
+		E41B72B21FC4EB9400EBF50E /* jesusA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jesusA.png; sourceTree = "<group>"; };
+		E41B72B41FC4EBD300EBF50E /* jesusB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jesusB.png; sourceTree = "<group>"; };
+		E48AD3D11FBF7C1600BF9850 /* The_TermiSavior */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = The_TermiSavior; sourceTree = BUILT_PRODUCTS_DIR; };
+		E48AD3D41FBF7C1600BF9850 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		E48AD3DD1FBF7D7E00BF9850 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		E48AD3E71FBF857E00BF9850 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
+		E48AD3E91FBF86AA00BF9850 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
+		E498036C1FC4FF08006E87C8 /* background2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background2.png; sourceTree = "<group>"; };
+		E498036E1FC605CF006E87C8 /* backgroundwithpent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundwithpent.png; sourceTree = "<group>"; };
+		E49803701FC67972006E87C8 /* checkerback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkerback.png; sourceTree = "<group>"; };
+		E49803721FC68311006E87C8 /* 3dbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3dbackground.png; sourceTree = "<group>"; };
+		E49803781FC72BD3006E87C8 /* sentar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sentar2.png; path = "../../Pix Art/sentar2.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E48AD3CE1FBF7C1600BF9850 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E48AD3EA1FBF86AA00BF9850 /* SDL2_ttf.framework in Frameworks */,
+				E48AD3E81FBF857E00BF9850 /* SDL2_image.framework in Frameworks */,
+				E48AD3E21FBF804A00BF9850 /* SDL2.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E41B72A71FC4877B00EBF50E /* images */ = {
+			isa = PBXGroup;
+			children = (
+				E498036C1FC4FF08006E87C8 /* background2.png */,
+				E41B72B41FC4EBD300EBF50E /* jesusB.png */,
+				E41B72B21FC4EB9400EBF50E /* jesusA.png */,
+				E41B72A81FC487B500EBF50E /* sentar.png */,
+			);
+			name = images;
+			path = "New Group1";
+			sourceTree = "<group>";
+		};
+		E48AD3C81FBF7C1600BF9850 = {
+			isa = PBXGroup;
+			children = (
+				E49803781FC72BD3006E87C8 /* sentar2.png */,
+				E49803721FC68311006E87C8 /* 3dbackground.png */,
+				E49803701FC67972006E87C8 /* checkerback.png */,
+				E498036E1FC605CF006E87C8 /* backgroundwithpent.png */,
+				E41B72A71FC4877B00EBF50E /* images */,
+				E48AD3D31FBF7C1600BF9850 /* The_TermiSavior */,
+				E48AD3D21FBF7C1600BF9850 /* Products */,
+				E48AD3DB1FBF7D7D00BF9850 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		E48AD3D21FBF7C1600BF9850 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E48AD3D11FBF7C1600BF9850 /* The_TermiSavior */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E48AD3D31FBF7C1600BF9850 /* The_TermiSavior */ = {
+			isa = PBXGroup;
+			children = (
+				E48AD3D41FBF7C1600BF9850 /* main.c */,
+			);
+			path = The_TermiSavior;
+			sourceTree = "<group>";
+		};
+		E48AD3DB1FBF7D7D00BF9850 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E48AD3E91FBF86AA00BF9850 /* SDL2_ttf.framework */,
+				E48AD3E71FBF857E00BF9850 /* SDL2_image.framework */,
+				E48AD3DD1FBF7D7E00BF9850 /* SDL2.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E48AD3D01FBF7C1600BF9850 /* The_TermiSavior */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E48AD3D81FBF7C1600BF9850 /* Build configuration list for PBXNativeTarget "The_TermiSavior" */;
+			buildPhases = (
+				E48AD3CD1FBF7C1600BF9850 /* Sources */,
+				E48AD3CE1FBF7C1600BF9850 /* Frameworks */,
+				E48AD3CF1FBF7C1600BF9850 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = The_TermiSavior;
+			productName = The_TermiSavior;
+			productReference = E48AD3D11FBF7C1600BF9850 /* The_TermiSavior */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E48AD3C91FBF7C1600BF9850 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0910;
+				ORGANIZATIONNAME = "Robert Huntington";
+				TargetAttributes = {
+					E48AD3D01FBF7C1600BF9850 = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = E48AD3CC1FBF7C1600BF9850 /* Build configuration list for PBXProject "The_TermiSavior" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E48AD3C81FBF7C1600BF9850;
+			productRefGroup = E48AD3D21FBF7C1600BF9850 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E48AD3D01FBF7C1600BF9850 /* The_TermiSavior */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E48AD3CD1FBF7C1600BF9850 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E48AD3D51FBF7C1600BF9850 /* main.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		E48AD3D61FBF7C1600BF9850 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		E48AD3D71FBF7C1600BF9850 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E48AD3D91FBF7C1600BF9850 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E48AD3DA1FBF7C1600BF9850 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E48AD3CC1FBF7C1600BF9850 /* Build configuration list for PBXProject "The_TermiSavior" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E48AD3D61FBF7C1600BF9850 /* Debug */,
+				E48AD3D71FBF7C1600BF9850 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E48AD3D81FBF7C1600BF9850 /* Build configuration list for PBXNativeTarget "The_TermiSavior" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E48AD3D91FBF7C1600BF9850 /* Debug */,
+				E48AD3DA1FBF7C1600BF9850 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E48AD3C91FBF7C1600BF9850 /* Project object */;
+}
