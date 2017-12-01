@@ -39,13 +39,28 @@ typedef struct
 
 typedef struct
 {
+    float x, y;
+    float dx, dy;
+    float health;
+    int direction;
+    int count;
+    int animFrame, facingLeft, facingUp;
+    
+} Spider;
+
+
+
+typedef struct
+{
     //Players
     Man man;
     Sentar sentar;
+    Spider spider;
     
     SDL_Texture *manFrame[2];
-    SDL_Texture *sentarFrame[2];
+    SDL_Texture *spiderFrame;
     SDL_Texture *background;
+    SDL_Texture *sentarFrame[2];
     
     int time;
     
@@ -79,7 +94,7 @@ void loadGame(GameState *game)
     game->manFrame[1] = SDL_CreateTextureFromSurface(game->renderer, surface);
     SDL_FreeSurface(surface);
     
-    game->man.x = 1100;
+    game->man.x = 500;
     game->man.y = 300;
     game->man.dx = 0;
     game->man.dy = 0;
@@ -119,13 +134,34 @@ void loadGame(GameState *game)
     game->sentar.animFrame = 0;
     game->sentar.facingLeft = 0;
     
+    
+
+    
+    surface = IMG_Load("spider.png");
+    if(surface == NULL)
+    {
+        printf("Cannot find spider.png!\n\n");
+        SDL_Quit();
+        exit(1);
+    }
+    
+    game->spiderFrame = SDL_CreateTextureFromSurface(game->renderer, surface);
+    SDL_FreeSurface(surface);
+    
+    game->spider.x = 0;
+    game->spider.y = game->man.y+50;
+    game->spider.dx = 0;
+    game->spider.dy = 0;
+    game->spider.count = 0;
+    game->spider.animFrame = 0;
+    game->spider.facingLeft = 0;
   
     
     game->time = 0;
     
 
    //Load Background
-    surface = IMG_Load("backgroundwithpent.png");
+    surface = IMG_Load("backgroundCheck640.png");
     if(surface == NULL)
     {
         printf("Cannot find background.png!\n\n");
@@ -224,7 +260,8 @@ int processEvents(SDL_Window *window, GameState *game)
                 break;
         }
     }
-    
+   
+    // player movement and boundaries
     const Uint8 *state = SDL_GetKeyboardState(NULL);
     if(state[SDL_SCANCODE_LEFT])
     {
@@ -254,9 +291,56 @@ int processEvents(SDL_Window *window, GameState *game)
         game->man.animFrame=1;
     }
     
+    if(game->man.y < 216 ){
+        game->man.y = 216;
+    }
+    
+    if(game->man.x<443){
+        game->man.x=443;
+    }
+    
+    if(game->man.x>443){ //&& game->man.y<((game->man.x-443)*(1.77) + 216)){
+        game->man.y = (game->man.x-443)*(1.77) + 216;
+    }
+    
+    if(game->man.y> 450){
+        game->man.y = 450;
+    }
+    
+    if(game->man.x>575){
+        game->man.x = 575;
+    }
+    
+  
+    //Spider movement
+    
+    if(game->spider.count < 100){
+        game->spider.direction = 1;
+        game->spider.count++;
+    
+    }else{
+        game->spider.direction = -1;
+        
+    }
+    
+    if(game->spider.direction > 0){
+        game->spider.y--;
+        game->spider.x++;
+        game->spider.count++;
+    }else{
+        game->spider.y++;
+        game->spider.x++;
+      
+    }
+   
+    
+    
+    
+    
+    
     
     //Sentar AI
-    
+   /*
     if(game->man.y > game->sentar.y)
     {
         game->sentar.y++;
@@ -280,10 +364,10 @@ int processEvents(SDL_Window *window, GameState *game)
         game->sentar.x--;
          game->sentar.x--;
          game->sentar.x--;
-    }
+    }*/
     
     
-    printf("Sentar x: %f\n Sentar y: %f\n man x: %f\n man y: %f\n", game->sentar.x, game->sentar.y, game->man.x, game->man.y);
+    printf("Sentar x: %f\n Sentar y: %f\n man x: %f\n man y: %f\n\n Count = %f\n", game->sentar.x, game->sentar.y, game->man.x, game->man.y, game->spider.count);
     return done;
 }
 
@@ -299,17 +383,20 @@ void doRender(SDL_Renderer *renderer, GameState *game)
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     
     //draw background
-    SDL_Rect backg = {0, 0, 1280, 1060};
+    SDL_Rect backg = {0, 0, 640, 530};
     SDL_RenderCopy(renderer, game->background, NULL, &backg);
     
     //draw a rectangle at man's position
-    SDL_Rect rect = { game->man.x, game->man.y, 150, 150 };
+    SDL_Rect rect = { game->man.x, game->man.y, 100, 100 };
     SDL_RenderCopyEx(renderer, game->manFrame[game->man.animFrame],
                      NULL, &rect, 0, NULL, (game->man.facingLeft == 0));
     
-    
-    SDL_Rect sentarRect = { game->sentar.x, game->sentar.y, 150, 150 };
-    SDL_RenderCopyEx(renderer, game->sentarFrame[game->sentar.animFrame], NULL, &sentarRect, 0, NULL, (game->sentar.facingLeft==0));
+/*
+   SDL_Rect sentarRect = { game->sentar.x, game->sentar.y, 150, 150 };
+   SDL_RenderCopyEx(renderer, game->sentarFrame[game->sentar.animFrame], NULL, &sentarRect, 0, NULL, (game->sentar.facingLeft==0));
+*/
+    SDL_Rect spiderRect = { game->spider.x, game->spider.y, 40, 40 };
+    SDL_RenderCopy(renderer, game->spiderFrame, NULL, &spiderRect);
     
     SDL_RenderPresent(renderer);
 }
@@ -328,8 +415,8 @@ int main(int argc, char *argv[])
     window = SDL_CreateWindow("Game Window",                     // window title
                               SDL_WINDOWPOS_UNDEFINED,           // initial x position
                               SDL_WINDOWPOS_UNDEFINED,           // initial y position
-                              1280,                               // width, in pixels
-                              1060,                               // height, in pixels
+                              640,                               // width, in pixels
+                              530,                               // height, in pixels
                               0                                  // flags
                               );
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);

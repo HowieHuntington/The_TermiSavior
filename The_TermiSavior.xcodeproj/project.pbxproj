@@ -21,6 +21,8 @@
 		E49803711FC67972006E87C8 /* checkerback.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = E49803701FC67972006E87C8 /* checkerback.png */; };
 		E49803731FC68311006E87C8 /* 3dbackground.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = E49803721FC68311006E87C8 /* 3dbackground.png */; };
 		E49803791FC72BD3006E87C8 /* sentar2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = E49803781FC72BD3006E87C8 /* sentar2.png */; };
+		E498037F1FC7753F006E87C8 /* backgroundCheck640.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = E498037E1FC7753F006E87C8 /* backgroundCheck640.png */; };
+		E4B175221FC9E1A9005F07C7 /* spider.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = E4B175211FC9E1A9005F07C7 /* spider.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,6 +32,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
+				E4B175221FC9E1A9005F07C7 /* spider.png in CopyFiles */,
+				E498037F1FC7753F006E87C8 /* backgroundCheck640.png in CopyFiles */,
 				E49803791FC72BD3006E87C8 /* sentar2.png in CopyFiles */,
 				E49803731FC68311006E87C8 /* 3dbackground.png in CopyFiles */,
 				E49803711FC67972006E87C8 /* checkerback.png in CopyFiles */,
@@ -58,6 +62,8 @@
 		E49803701FC67972006E87C8 /* checkerback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkerback.png; sourceTree = "<group>"; };
 		E49803721FC68311006E87C8 /* 3dbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3dbackground.png; sourceTree = "<group>"; };
 		E49803781FC72BD3006E87C8 /* sentar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sentar2.png; path = "../../../Pix Art/sentar2.png"; sourceTree = "<group>"; };
+		E498037E1FC7753F006E87C8 /* backgroundCheck640.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backgroundCheck640.png; path = "../../Pix Art/backgroundCheck640.png"; sourceTree = "<group>"; };
+		E4B175211FC9E1A9005F07C7 /* spider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spider.png; path = "../../Pix Art/spider.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +98,8 @@
 		E48AD3C81FBF7C1600BF9850 = {
 			isa = PBXGroup;
 			children = (
+				E4B175211FC9E1A9005F07C7 /* spider.png */,
+				E498037E1FC7753F006E87C8 /* backgroundCheck640.png */,
 				E41B72A71FC4877B00EBF50E /* images */,
 				E48AD3D31FBF7C1600BF9850 /* src */,
 				E48AD3D21FBF7C1600BF9850 /* Products */,
