@@ -8,85 +8,21 @@
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
 #include <SDL2_ttf/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
-
-const int totalBullets = 100;
-const int spiNum = 5;
-int count = 0;
+#include "main.h"
 
 
 
-typedef struct
+
+
+void initializeGame(GameState *game)
 {
-    float x, y;
-    float dx, dy;
-    short life;
-    char *name;
-    int onLedge;
     
-    int animFrame, facingLeft;
-} Man;
-
-typedef struct
-{
-    int x, y;
-}background;
-
-typedef struct
-{
-    float x, y;
-    float dx, dy;
-    float health;
-    int animFrame, facingLeft, facingUp;
+   
     
-} Sentar;
-
-typedef struct
-{
-    float x, y;
-    float slopeX, slopeY;
-    float dx, dy;
-    float health;
-    int direction;
-    int count;
-    int animFrame, facingLeft, facingUp;
-    
-} Spider;
-
-typedef struct
-{
-    float x, y;
-    
-}Bullet;
-
-
-
-typedef struct
-{
-    //Players
-    Man man;
-    Sentar sentar;
-    Spider spider[5];
-    Bullet bullet[totalBullets];
-    
-    
-    SDL_Texture *bulletFrame;
-    SDL_Texture *manFrame[2];
-    SDL_Texture *spiderFrame;
-    SDL_Texture *background;
-    SDL_Texture *sentarFrame[2];
-    
-    int time;
-    
-    SDL_Renderer *renderer;
-} GameState;
-
-
-
-void loadGame(GameState *game)
-{
     SDL_Surface *surface = NULL;
     
     //Load images and create rendering textures from them
@@ -132,37 +68,33 @@ void loadGame(GameState *game)
     
     game->bulletFrame = SDL_CreateTextureFromSurface(game->renderer, surface);
     SDL_FreeSurface(surface);
+    
+    //Load muzzle flash
+    
+    surface = IMG_Load("muzzle1.png");
+    if(surface == NULL)
+    {
+        printf("Cannot find muzzle1.png!\n\n");
+        SDL_Quit();
+        exit(1);
+    }
+    
+    game->muzzleFrame[0] = SDL_CreateTextureFromSurface(game->renderer, surface);
+    SDL_FreeSurface(surface);
+    
+    surface = IMG_Load("muzzle2.png");
+    if(surface == NULL)
+    {
+        printf("Cannot find muzzle2.png!\n\n");
+        SDL_Quit();
+        exit(1);
+    }
+    
+    game->muzzleFrame[1] = SDL_CreateTextureFromSurface(game->renderer, surface);
+    SDL_FreeSurface(surface);
+
 
     //Load Enemy
-    surface = IMG_Load("sentar.png");
-    if(surface == NULL)
-    {
-        printf("Cannot find sentar.png!\n\n");
-        SDL_Quit();
-        exit(1);
-    }
-    
-    game->sentarFrame[0] = SDL_CreateTextureFromSurface(game->renderer, surface);
-    SDL_FreeSurface(surface);
-    
-    surface = IMG_Load("sentar2.png");
-    if(surface == NULL)
-    {
-        printf("Cannot find sentar.png!\n\n");
-        SDL_Quit();
-        exit(1);
-    }
-    
-    game->sentarFrame[1] = SDL_CreateTextureFromSurface(game->renderer, surface);
-    SDL_FreeSurface(surface);
-    
-    game->sentar.x = 0;
-    game->sentar.y = game->man.y;
-    game->sentar.dx = 0;
-    game->sentar.dy = 0;
-    game->sentar.animFrame = 0;
-    game->sentar.facingLeft = 0;
-    
     
 
     //spider initialization
@@ -174,41 +106,122 @@ void loadGame(GameState *game)
         exit(1);
     }
     
-    game->spiderFrame = SDL_CreateTextureFromSurface(game->renderer, surface);
+    game->spiderFrame[0] = SDL_CreateTextureFromSurface(game->renderer, surface);
     SDL_FreeSurface(surface);
     
-    int slopeY[5] = {-3, -2, -1, 0, 1};
-    int slopeX[5] = {1, 2, 3, 2, 3};
-    for(int i =0; i <5; i ++){
-        game->spider[i].x = 0;
+    surface = IMG_Load("spiderb.png");
+    if(surface == NULL)
+    {
+        printf("Cannot find spiderb.png!\n\n");
+        SDL_Quit();
+        exit(1);
+    }
+    
+    game->spiderFrame[2] = SDL_CreateTextureFromSurface(game->renderer, surface);
+    SDL_FreeSurface(surface);
+    
+    surface = IMG_Load("spiderc.png");
+    if(surface == NULL)
+    {
+        printf("Cannot find spiderc.png!\n\n");
+        SDL_Quit();
+        exit(1);
+    }
+    
+    game->spiderFrame[1] = SDL_CreateTextureFromSurface(game->renderer, surface);
+    SDL_FreeSurface(surface);
+    
+   
+    int slopeY[20] = {-3, -2, -1, 0, 1, 2, 3,-3, -2, -1, 0, 1, -2, 3,-2, -1, -2, 1, 2, 3};
+    int slopeX[20] = {1, 2, 3, 1, 2, 3, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3};
+    
+    for(int i =0; i <spiNum; i ++){
+      
+       
+        
+        game->spider[i].visible = 1;
+        game->spider[i].x = -300 - i*20;
         game->spider[i].y = game->man.y+ (10*i);
         game->spider[i].slopeX = slopeX[i];
         game->spider[i].slopeY = slopeY[i];
         game->spider[i].dx = 0;
         game->spider[i].dy = 0;
         game->spider[i].animFrame = 0;
-    }
-  
+        
     
-    game->time = 0;
+    
+    
+        
+    }
+    
+    
+   
+    
+   game->time = 0;
     
 
    //Load Background
-    surface = IMG_Load("backgroundCheck640.png");
+    surface = IMG_Load("backgroundPortalA.png");
     if(surface == NULL)
     {
-        printf("Cannot find background.png!\n\n");
+        printf("Cannot find backgrounda.png!\n\n");
         SDL_Quit();
         exit(1);
     }
     
-    game->background = SDL_CreateTextureFromSurface(game->renderer, surface);
+    game->backgroundFrame[0] = SDL_CreateTextureFromSurface(game->renderer, surface);
+    SDL_FreeSurface(surface);
+    
+    surface = IMG_Load("backgroundPortalb.png");
+    if(surface == NULL)
+    {
+        printf("Cannot find backgrounda.png!\n\n");
+        SDL_Quit();
+        exit(1);
+    }
+    
+    game->backgroundFrame[1] = SDL_CreateTextureFromSurface(game->renderer, surface);
+    SDL_FreeSurface(surface);
+
+    surface = IMG_Load("backgroundPortalc.png");
+    if(surface == NULL)
+    {
+        printf("Cannot find backgrounda.png!\n\n");
+        SDL_Quit();
+        exit(1);
+    }
+    
+    game->backgroundFrame[2] = SDL_CreateTextureFromSurface(game->renderer, surface);
+    SDL_FreeSurface(surface);
+
+    surface = IMG_Load("backgroundPortald.png");
+    if(surface == NULL)
+    {
+        printf("Cannot find backgrounda.png!\n\n");
+        SDL_Quit();
+        exit(1);
+    }
+    
+    game->backgroundFrame[3] = SDL_CreateTextureFromSurface(game->renderer, surface);
     SDL_FreeSurface(surface);
 
     
+
+    //Load Sounds
+    game->music = Mix_LoadWAV("8bitgame.wav");
+    if(game->music != NULL){
+        Mix_VolumeChunk(game->music, 64);
+        Mix_PlayChannel(-1, game->music, -1);
+    }
+    
+    game->gunshot = Mix_LoadWAV("gunshot.wav");
+    if(game->gunshot != NULL){
+        Mix_VolumeChunk(game->gunshot, 4  );
+        
+    }
 }
 
-void process(GameState *game)
+void processAnimations(GameState *game)
 {
     //add time
     game->time++;
@@ -216,7 +229,24 @@ void process(GameState *game)
     //man movement
     Man *man = &game->man;
     
-    Sentar *sentar = &game->sentar;
+    
+    //Spider Animations
+    for(int i = 0; i <spiNum; i++){
+    if((game->time + (int)game->spider[i].slopeX*10) %7 == 0){
+        
+            if(game->spider[i].animFrame == 0){
+                game->spider[i].animFrame=1;
+            }else
+                if(game->spider[i].animFrame==1){
+                    game->spider[i].animFrame=2;
+                }else{
+                    game->spider[i].animFrame=0;
+                }
+        }
+    }
+    
+    
+   
     
     const Uint8 *state = SDL_GetKeyboardState(NULL);
     if(state[SDL_SCANCODE_UP] ||state[SDL_SCANCODE_DOWN])
@@ -232,30 +262,95 @@ void process(GameState *game)
                 man->animFrame = 0;
             }
         }
-    
-    
+        
+        
     }
-
    
-    if(game->time % 8 == 0)
+}
+
+
+void playerMovement(GameState *game){
+    // player movement and boundaries
+    const Uint8 *state = SDL_GetKeyboardState(NULL);
+    if(state[SDL_SCANCODE_UP])
     {
-        if(sentar->animFrame == 0)
+        game->man.x -= 2;
+        
+    }else
+        if(state[SDL_SCANCODE_DOWN])
         {
-            sentar->animFrame = 1;
+            game->man.x += 2;
+            
+        }else{
+            game->man.animFrame=1;
         }
-        else
-        {
-            sentar->animFrame = 0;
+    
+    if(game->man.y < 216 ){
+        game->man.y = 216;
+    }
+    
+    if(game->man.x<443){
+        game->man.x=443;
+    }
+    
+    if(game->man.x>443){
+        game->man.y = (game->man.x-443)*(1.77) + 216;
+    }
+    
+    if(game->man.y> 450){
+        game->man.y = 450;
+    }
+    
+    if(game->man.x>575){
+        game->man.x = 575;
+    }
+    
+   
+    
+}
+
+
+void spiderMovement(GameState *game){
+    //Spider movement
+    int i;
+    for(i = 0; i < spiNum; i++){
+        if(game->spider[i].y < 280 || game->spider[i].y > 500){
+            game->spider[i].slopeY *= -1;
+        }
+        game->spider[i].y += game->spider[i].slopeY;
+        game->spider[i].x += game->spider[i].slopeX;
+        
+        if(game->time > 10000){
+            game->spider[i].x += game->spider[i].slopeX;;
         }
     }
     
-    
+}
 
-    
+
+void bulletCreation(GameState *game){
+    // bullet creation
+    const Uint8 *state = SDL_GetKeyboardState(NULL);
+    if(frames%7 == 0){
+    if(state[SDL_SCANCODE_SPACE]){
+       
+        Mix_PlayChannel(-1, game->gunshot, 0);
+        
+        
+        game->bullet[count].x = game->man.x + 10;
+        game->bullet[count].y= game->man.y ;
+        count++;
+        if(count == totalBullets){
+            count = 0;
+        }
+    }
+    }
+
 }
 
 int processEvents(SDL_Window *window, GameState *game)
 {
+    
     SDL_Event event;
     int done = 0;
     
@@ -289,86 +384,54 @@ int processEvents(SDL_Window *window, GameState *game)
                 break;
         }
     }
-   
-    // player movement and boundaries
-    const Uint8 *state = SDL_GetKeyboardState(NULL);
-    if(state[SDL_SCANCODE_UP])
-    {
-        game->man.x -= 2;
-        
-    }else
-    if(state[SDL_SCANCODE_DOWN])
-    {
-        game->man.x += 2;
-
-    }else{
-        game->man.animFrame=1;
-    }
     
-    if(game->man.y < 216 ){
-        game->man.y = 216;
-    }
-    
-    if(game->man.x<443){
-        game->man.x=443;
-    }
-    
-    if(game->man.x>443){ //&& game->man.y<((game->man.x-443)*(1.77) + 216)){
-        game->man.y = (game->man.x-443)*(1.77) + 216;
-    }
-    
-    if(game->man.y> 450){
-        game->man.y = 450;
-    }
-    
-    if(game->man.x>575){
-        game->man.x = 575;
-    }
-    
-    // bullet creation
-    if(state[SDL_SCANCODE_SPACE]){
-        game->bullet[count].x = game->man.x + 40;
-        game->bullet[count].y= game->man.y;
-        count++;
-        if(count == totalBullets){
-            count = 0;
-        }
-        
-    }
+    playerMovement(game);
+    spiderMovement(game);
+    bulletCreation(game);
     
     
-  
-    //Spider movement
-    int i;
-    for(i = 0; i < spiNum; i++){
-        if(game->spider[i].y < 280 || game->spider[i].y > 500){
-            game->spider[i].slopeY *= -1;
-        }
-        game->spider[i].y += game->spider[i].slopeY;
-        game->spider[i].x += game->spider[i].slopeX;
-    }
-   
     
-    printf("Spider x: %f\n Spider y: %f\n man x: %f\n man y: %f\n\n Count = %f\n", game->spider[spiNum].x, game->spider[spiNum].y, game->man.x, game->man.y);
+   // printf("Spider x: %f\n Spider y: %f\n man x: %f\n man y: %f\n\n Count = %f\n", game->spider[spiNum].x, game->spider[spiNum].y, game->man.x, game->man.y);
+    
     return done;
 }
 
-/*
-Spider collision(GameState *game){
-    for (int spi = 0; spi < spiNum; spi++){
-        for(int bul = 0; bul < totalBullets; bul++){
-         if (game->bullet[bul].x < game->spider[spi].x + 40 &&
-             game->bullet[bul].x > game->spider[spi].x - 40 &&
-             game->bullet[bul].y < game->spider[spi].y + 40 &&
-             game->bullet[bul].y > game->spider[spi].y - 40)
-             return game->spider[spi];
-             }
+
+void spiderCollision(GameState *game){
+
+    
+    for(int bul = 0; bul< totalBullets; bul++){
+        for(int spi = 0; spi< spiNum; spi++){
+            if(game->spider[spi].x > 600){
+                game->spider[spi].x = -20;
+            }
+            if (game->bullet[bul].x < game->spider[spi].x + 40 &&
+                game->bullet[bul].x > game->spider[spi].x - 40 &&
+                game->bullet[bul].y < game->spider[spi].y + 40 &&
+                game->bullet[bul].y > game->spider[spi].y - 40){
+                
+                game->bullet[bul].y = 1000;
+                game->spider[spi].x = -50;
+                
+                
+                /*game->spider[spi].visible = 0;
+               
+                if(game->spider[spi].visible == 0){
+                    printf("Bullet x: %f\nBullet y: %f\n spider x: %f\n spider y: %f\n",game->bullet[0].x ,game->bullet[0].y ,
+                           game->spider[0].x , game->spider[0].y);
+                }*/
+            }
         }
-    return NULL;
-}*/
+    }
+    
+   
+}
 
 
-void doRender(SDL_Renderer *renderer, GameState *game)
+
+
+
+void drawSprites(SDL_Renderer *renderer, GameState *game)
 {
     //set the drawing color to blue
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
@@ -380,29 +443,68 @@ void doRender(SDL_Renderer *renderer, GameState *game)
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     
     //draw background
+    
     SDL_Rect backg = {0, 0, 640, 530};
-    SDL_RenderCopy(renderer, game->background, NULL, &backg);
+    SDL_RenderCopy(renderer, game->backgroundFrame[bgFrame], NULL, &backg);
+    if(game->time % 6 == 0){
+    if(bgFrame > 2){
+        bgFrame =0;
+    }else{
+        bgFrame++;
+    }
+    }
+
     
     //draw a rectangle at man's position
     SDL_Rect rect = { game->man.x, game->man.y, 100, 100 };
     SDL_RenderCopyEx(renderer, game->manFrame[game->man.animFrame],
                      NULL, &rect, 0, NULL, (game->man.facingLeft == 0));
     
-/*
-   SDL_Rect sentarRect = { game->sentar.x, game->sentar.y, 150, 150 };
-   SDL_RenderCopyEx(renderer, game->sentarFrame[game->sentar.animFrame], NULL, &sentarRect, 0, NULL, (game->sentar.facingLeft==0));
-*/
+    
+    //draw muzzleflash
+    
+    int muzzleNum = 0;
+    game->muzzleFlash[0].x=game->man.x-10;
+    game->muzzleFlash[0].y=game->man.y+30;
+    game->muzzleFlash[1].x=game->man.x-10;
+    game->muzzleFlash[1].y=game->man.y+30;
+    const Uint8 *state = SDL_GetKeyboardState(NULL);
+    if(state[SDL_SCANCODE_SPACE])
+    {
+    if(game->time % 5 == 0){
+        if(muzzleNum == 0){
+        SDL_Rect muzzle = { game->muzzleFlash[muzzleNum].x, game->muzzleFlash[muzzleNum].y, 30, 30 };
+        SDL_RenderCopy(renderer, game->muzzleFrame[muzzleNum], NULL, &muzzle);
+            muzzleNum=1;
+        }else{
+            SDL_Rect muzzle = { game->muzzleFlash[muzzleNum].x, game->muzzleFlash[muzzleNum].y, 36, 36 };
+            SDL_RenderCopy(renderer, game->muzzleFrame[muzzleNum], NULL, &muzzle);
+            muzzleNum = 0;
+        }
+        
+    }
+    }
+    //draw spiders
+   
     for(int i = 0; i < spiNum; i++){
-        SDL_Rect spiderRect = { game->spider[i].x, game->spider[i].y, 40, 40 };
-        SDL_RenderCopy(renderer, game->spiderFrame, NULL, &spiderRect);
+        if(game->spider[i].visible == 1){
+            SDL_Rect spiderRect = { game->spider[i].x, game->spider[i].y, 40, 40 };
+            //SDL_RenderFillRect(renderer, &spiderRect);
+            SDL_RenderCopy(renderer, game->spiderFrame[game->spider[i].animFrame], NULL, &spiderRect);
+        }
     }
 
     
-//draw bullet
+    //draw bullet
+   
+   
     for(int i = 0; i < count; i++){
-    SDL_Rect bulletRect = {game->bullet[i].x-=30, game->bullet[i].y+50, 5, 5};
-    SDL_RenderCopy(renderer, game->bulletFrame, NULL, &bulletRect);
- }
+     
+        SDL_Rect bulletRect = {game->bullet[i].x-=10, game->bullet[i].y+33, 8, 8};
+        SDL_RenderCopy(renderer, game->bulletFrame, NULL, &bulletRect);
+        
+    }
+ 
 
     
     
@@ -430,7 +532,9 @@ int main(int argc, char *argv[])
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     gameState.renderer = renderer;
     
-    loadGame(&gameState);
+    
+    Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096);
+    initializeGame(&gameState);
     
     // The window is open: enter program loop (see SDL_PollEvent)
     int done = 0;
@@ -441,20 +545,31 @@ int main(int argc, char *argv[])
         //Check for events
         done = processEvents(window, &gameState);
         
-        process(&gameState);
+        processAnimations(&gameState);
         
         //Render display
-        doRender(renderer, &gameState);
+        drawSprites(renderer, &gameState);
+        
+        spiderCollision(&gameState);
+        
         
         //don't burn up the CPU
         //SDL_Delay(10);
+        frames++;
     }
     
     
     //Shutdown game and unload all memory
-    SDL_DestroyTexture(gameState.manFrame);
-     SDL_DestroyTexture(gameState.background);
+    SDL_DestroyTexture(gameState.manFrame[0]);
+    SDL_DestroyTexture(gameState.manFrame[1]);
+    SDL_DestroyTexture(gameState.background);
     
+    SDL_DestroyTexture(gameState.spiderFrame);
+    SDL_DestroyTexture(gameState.bulletFrame);
+    
+    
+    Mix_FreeChunk(gameState.gunshot);
+    Mix_FreeChunk(gameState.music);
     // Close and destroy the window
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
